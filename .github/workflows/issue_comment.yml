@@ -22,4 +22,21 @@ jobs:
 
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
+          
+  api-comment:
+      runs-on: ubuntu-latest
+      steps: 
+        - name: Create comment using GH API
+          run: |
+            gh api -X POST \
+              http://api.github.com/repo/${USER}/${REPO}/issues/${ISSUE_NUM}/comments \
+              -f body=' \
+              This comment was generated using the GitHub API \
+              ' \
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+            USER: ${{ github.event.user.login }}
+            REPO: ${{ github.event.repository.name }}
+            ISSUE_NUM: ${{ github.event.issue.number }}
+          
         
