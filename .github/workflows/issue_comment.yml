@@ -29,7 +29,7 @@ jobs:
         - name: Create comment using GH API
           run: |
             gh api -X POST \
-              http://api.github.com/repo/${USER}/${REPO}/issues/${ISSUE_NUM}/comments \
+              http://api.github.com/repos/${USER}/${REPO}/issues/${ISSUE_NUM}/comments \
               -f body='This comment was generated using the GitHub API' \
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
