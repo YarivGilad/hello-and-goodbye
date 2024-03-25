@@ -1,12 +1,14 @@
-# .github/workflows/greetings.yml
-
 # workflow name
 name: Greetings workflow
 
-#Triggers section that control when the workflow will run
+# This section controls when the workflow will run
 on: 
-  # Trigger the workflow on a push event but only for the "main" branch
+  # Trigger the workflow on a push and pull request events
+  # but only for the "main" branch
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
   # Allows you to trigger this workflow manually from the Actions tab
@@ -21,11 +23,11 @@ jobs:
       - uses: actions/checkout@v4  # a pre-built action to checkout the repo 
       - name: hello world          # step name
         run: echo "hello world"    # the command to run in this step
-        # shell: bash                # the shell to run the command
+        shell: bash                # the shell to run the command
 
   farewell: # a second job (runs in parallel with the first job)
     runs-on: ubuntu-latest 
     steps:
       - name: farewell
         run: echo "So long and thanks for all the fish"
-        # shell: bash
+        shell: bash
