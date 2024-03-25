@@ -28,12 +28,15 @@ jobs:
       steps: 
         - name: Create comment using GH API
           run: |
-            gh api -X POST \
-              http://api.github.com/repos/${USER}/${REPO}/issues/${ISSUE_NUM}/comments \
-              -f body='This comment was generated using the GitHub API' \
+            gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /repos/${OWNER}/${REPO}/issues/${ISSUE_NUM}/comments \
+              -f body='This comment was generated using the GitHub API'
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-            USER: ${{ github.event.user.login }}
+            OWNER: ${{ github.event.user.login }}
             REPO: ${{ github.event.repository.name }}
             ISSUE_NUM: ${{ github.event.issue.number }}
           
