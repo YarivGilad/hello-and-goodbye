@@ -30,9 +30,7 @@ jobs:
           run: |
             gh api -X POST \
               http://api.github.com/repo/${USER}/${REPO}/issues/${ISSUE_NUM}/comments \
-              -f body='
-              This comment was generated using the GitHub API 
-              ' 
+              -f body='This comment was generated using the GitHub API' \
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
             USER: ${{ github.event.user.login }}
